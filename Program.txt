@@ -1,0 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+public class wordCountClass
+{
+    public static void Main(string[] args)
+    {
+        //string str;
+        int wrdCount = 0;
+        int wrd, l;
+
+        string wordEorT = " "; //To store words ending in e or t
+
+        //str = Console.ReadLine();
+        string str = System.IO.File.ReadAllText("C:\\myFiles\\inputFile.txt");
+        l = 1;
+        // wrd = 1;
+        wrd = 0;
+        /* loop till end of string */
+        while (l <= str.Length - 1)
+        {
+            /* check whether the current character is white space or new line or tab character*/
+            if ((str[l] == '.' || str[l] == ' ' || str[l] == '\t' || str[l] == '!' || str[l] == ',' || str[l] == '?' || str[l] == '\n') && (str[l - 1] == 't' || str[l - 1] == 'e'))
+            {
+                wrd++;
+
+                // wordEorT = str[l] + " ";
+
+
+            }
+            l++;
+
+
+        }
+        char[] separator = { ' ' };
+        wrdCount = str.Split(separator, StringSplitOptions.RemoveEmptyEntries).Length; //count the words in the string
+
+        //store words ending in e or t
+        for (int i = str.Length - 1; i >= 0; i--)
+        {
+            if (str[i] == 'e' || str[i] == 't')
+            {
+                if (str[i - 1] != '.' || str[i - 1] != ' ' || str[i - 1] != '\t' || str[i - 1] != '!' || str[i - 1] != ',' || str[i - 1] != '?' || str[i - 1] != '\n')
+                {
+                    wordEorT = str[i] + " ";
+                    
+
+                }
+            }
+        }
+
+
+        Console.Write("There are {0} words that end in t or e", wrd);
+        Console.Write("\n" + "In the file there were " + "\n" + wrdCount + " words");
+        //Console.Write("\n" + wordEorT);
+        //Console.Write("\n" + "Words that ended in t or e" + "\n" + str.Substring(0, 5));
+        //string str2 = str.Substring(0, 5);
+
+        //Console.Write("\n" + wordEorT);
+
+        //Console.Write(str.Substring(6,8));
+        //Console.Write("\n" + str.Substring(9,13));
+        //Console.Write("\n" + str);
+
+    }
+}
